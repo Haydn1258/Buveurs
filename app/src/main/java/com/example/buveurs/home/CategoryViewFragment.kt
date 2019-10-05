@@ -24,7 +24,8 @@ class CategoryViewFragment : Fragment(){
         val button = view.findViewById<Button>(R.id.button)
 
         button.setOnClickListener {
-            fragmentManager!!.beginTransaction().replace(R.id.mainContent, second).commit()
+            MainActivity.homeStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
+            fragmentManager!!.beginTransaction().replace(R.id.mainContent, WritelistViewFragment()).commit()
         }
         return view
     }
