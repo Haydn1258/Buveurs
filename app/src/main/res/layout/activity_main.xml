@@ -8,6 +8,13 @@
     tools:context=".MainActivity">
 
 
+    <View
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        app:layout_constraintTop_toTopOf="@id/guideline2"
+        android:background="@android:color/darker_gray"/>
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"

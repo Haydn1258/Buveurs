@@ -21,12 +21,7 @@ class CategoryViewFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = LayoutInflater.from(activity).inflate(R.layout.fragment_category, container, false)
-        val button = view.findViewById<Button>(R.id.button)
 
-        button.setOnClickListener {
-            MainActivity.homeStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
-            fragmentManager!!.beginTransaction().replace(R.id.mainContent, WritelistViewFragment()).commit()
-        }
         return view
     }
 }
