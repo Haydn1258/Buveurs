@@ -27,7 +27,9 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId){
             R.id.action_home ->{
-                //
+                // lastSelect가 home 이면 homeStack 클리어 후 CategoryViewFragment보여줌
+                // home이 아니면 stackPush에서 lastSelect에 해당하는 스택에 push 후 homeStack에서 pop한 fragment를 보여줌
+                // 나머지도 동일
                 if(lastSelect.equals("home")){
                     homeStack.clear()
                     manager.beginTransaction().replace(R.id.mainContent, CategoryViewFragment()).commit()
@@ -73,8 +75,6 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         bottomNavView.setOnNavigationItemSelectedListener(this)
         manager.beginTransaction().replace(R.id.mainContent, CategoryViewFragment()).commit()
         lastSelect = "home"
-
-
     }
 
     //마지막 선택별 스택 푸쉬
