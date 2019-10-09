@@ -8,7 +8,9 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.example.buveurs.home.CategoryViewFragment
 import com.example.buveurs.home.WritelistViewFragment
+import com.example.buveurs.mypage.MyPageViewFragment
 import com.example.buveurs.search.SearchViewFragment
+import com.example.buveurs.writing.WritingViewFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_category.*
@@ -16,13 +18,10 @@ import java.util.*
 import kotlin.collections.HashMap
 import kotlin.concurrent.fixedRateTimer
 
-
-const val stack_1 = 1001
-const val stack_2 = 1002
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
 
     val manager = supportFragmentManager
-    var lastSelect = ""
+
     //바텀네비게이션 선택 이벤트
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when(p0.itemId){
@@ -36,8 +35,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
                 }else{
                     stackPush(lastSelect)
                     if(homeStack.empty()){
-                        val categoryViewFragment = CategoryViewFragment()
-                        manager.beginTransaction().replace(R.id.mainContent, categoryViewFragment).commit()
+                        manager.beginTransaction().replace(R.id.mainContent, CategoryViewFragment()).commit()
                         lastSelect = "home"
                     }else{
                         val lastFragmentStack = homeStack.pop()
@@ -49,18 +47,52 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
             }
             R.id.action_search ->{
                 if(lastSelect.equals("search")){
-                    homeStack.clear()
+                    searchStack.clear()
                     manager.beginTransaction().replace(R.id.mainContent, SearchViewFragment()).commit()
                 }else{
                     stackPush(lastSelect)
                     if(searchStack.empty()){
-                        val searchViewFragment = SearchViewFragment()
-                        manager.beginTransaction().replace(R.id.mainContent, searchViewFragment).commit()
+
+                        manager.beginTransaction().replace(R.id.mainContent, SearchViewFragment()).commit()
                         lastSelect = "search"
                     }else{
                         val lastFragmentStack = searchStack.pop()
                         manager.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
                         lastSelect = "search"
+                    }
+                }
+                return true
+            }
+            R.id.action_writing ->{
+                if(lastSelect.equals("writing")){
+                    writingStack.clear()
+                    manager.beginTransaction().replace(R.id.mainContent, WritingViewFragment()).commit()
+                }else{
+                    stackPush(lastSelect)
+                    if(writingStack.empty()){
+                        manager.beginTransaction().replace(R.id.mainContent, WritingViewFragment()).commit()
+                        lastSelect = "writing"
+                    }else{
+                        val lastFragmentStack = writingStack.pop()
+                        manager.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+                        lastSelect = "writing"
+                    }
+                }
+                return true
+            }
+            R.id.action_mypage ->{
+                if(lastSelect.equals("mypage")){
+                    mypageStack.clear()
+                    manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
+                }else{
+                    stackPush(lastSelect)
+                    if(mypageStack.empty()){
+                        manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
+                        lastSelect = "mypage"
+                    }else{
+                        val lastFragmentStack = mypageStack.pop()
+                        manager.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+                        lastSelect = "mypage"
                     }
                 }
                 return true
@@ -96,14 +128,10 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
     }
 
    companion object{
-       val first = CategoryViewFragment()
-       var second = WritelistViewFragment()
        var homeStack = Stack<Fragment>()
        var searchStack = Stack<Fragment>()
        var writingStack = Stack<Fragment>()
        var mypageStack = Stack<Fragment>()
-
-
-
+       var lastSelect = ""
     }
 }

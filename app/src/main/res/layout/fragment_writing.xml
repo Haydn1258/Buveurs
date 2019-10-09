@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/writingTopGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/writingStartGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/writingEndGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <View
+        android:id="@+id/writingView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toTopOf="@id/writingTopGuide" />
+
+    <TextView
+        android:id="@+id/txtvWriting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/writing"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/writingView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:color/transparent"
+        android:text="@string/complete"
+        android:textColor="@android:color/holo_blue_light"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/writingView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageView"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txtvWriting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtvWriting"
+        app:srcCompat="@drawable/baseline_clear_black_36" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@+id/writingStartGuide"
+        app:layout_constraintEnd_toEndOf="@id/writingEndGuide"
+        app:layout_constraintTop_toBottomOf="@+id/writingView"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtvAlcoholName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:text="@string/alcoholname"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/edtAlcoholName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingStart="10dp"
+                android:textSize="16sp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:background="@drawable/edge"
+                android:maxLength="20"
+                android:layout_marginTop="10dp"
+
+                />
+
+            <TextView
+                android:id="@+id/txtvAlcoholCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alcoholcategory"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/button2"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/edge"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:text="@string/soju"
+                android:layout_marginTop="10dp">
+
+
+            </Button>
+
+            <TextView
+                android:id="@+id/txtvAlcoholPicture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/alcoholpicture"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"/>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/outline_photo_black_48" />
+            <TextView
+                android:id="@+id/txtvStar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/starscore"
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator = "false"
+                android:numStars = "5"
+                android:rating = "0"
+                android:stepSize="0.5"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
