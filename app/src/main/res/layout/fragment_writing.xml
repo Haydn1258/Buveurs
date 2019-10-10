@@ -120,20 +120,13 @@
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"/>
 
-            <Button
-                android:id="@+id/button2"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
+            <Spinner
+                android:id="@+id/spinner"
                 android:background="@drawable/edge"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:paddingStart="10dp"
-                android:text="@string/soju"
-                android:layout_marginTop="10dp">
-
-
-            </Button>
+                android:layout_width="match_parent"
+                android:entries="@array/spinnerarray"
+                android:theme="@style/SpinnerTheme"
+                android:layout_height="40dp" />
 
             <TextView
                 android:id="@+id/txtvAlcoholPicture"
@@ -163,10 +156,10 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:isIndicator = "false"
-                android:numStars = "5"
-                android:rating = "0"
-                android:stepSize="0.5"/>
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="0.5" />
 
 
         </LinearLayout>

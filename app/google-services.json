@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "530608092713",
+    "firebase_url": "https://buveurs-e7653.firebaseio.com",
+    "project_id": "buveurs-e7653",
+    "storage_bucket": "buveurs-e7653.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530608092713:android:fef2a674e6e4fad48a0e38",
+        "android_client_info": {
+          "package_name": "com.example.buveurs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530608092713-vu9ghkad6spm1965qhonsprt5e83g2o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.buveurs",
+            "certificate_hash": "0869b98c52268d31cfcf3df11d473cac8c3aed26"
+          }
+        },
+        {
+          "client_id": "530608092713-ic5285l5j968p25ti8d2h3m96bcsadgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAULR8GS4RX0lAchrBtts9lyTQwsZHCM3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530608092713-ic5285l5j968p25ti8d2h3m96bcsadgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
