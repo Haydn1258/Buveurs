@@ -22,6 +22,7 @@
     <string name="signup">회원가입</string>
     <string name="loginfail">로그인실패</string>
     <string name="nickname">닉네임</string>
+    <string name="passwordpattern">패스워드(4~16자)</string>
 
 
 

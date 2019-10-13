@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "530608092713",
-    "firebase_url": "https://buveurs-e7653.firebaseio.com",
-    "project_id": "buveurs-e7653",
-    "storage_bucket": "buveurs-e7653.appspot.com"
+    "project_number": "860116562885",
+    "firebase_url": "https://buveurs-65776.firebaseio.com",
+    "project_id": "buveurs-65776",
+    "storage_bucket": "buveurs-65776.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:530608092713:android:fef2a674e6e4fad48a0e38",
+        "mobilesdk_app_id": "1:860116562885:android:f82b28129c4b81322551ac",
         "android_client_info": {
           "package_name": "com.example.buveurs"
         }
       },
       "oauth_client": [
         {
-          "client_id": "530608092713-vu9ghkad6spm1965qhonsprt5e83g2o8.apps.googleusercontent.com",
+          "client_id": "860116562885-187fcdk2qdae27f9u8gh1oaui3uc1rmm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.buveurs",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "530608092713-ic5285l5j968p25ti8d2h3m96bcsadgf.apps.googleusercontent.com",
+          "client_id": "860116562885-vsgcojl3ajet5ppnuh1dba799d8p0r0e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAULR8GS4RX0lAchrBtts9lyTQwsZHCM3Y"
+          "current_key": "AIzaSyCyppsv-QUhE_W1CVgtCWUHGLkXDfJXEso"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "530608092713-ic5285l5j968p25ti8d2h3m96bcsadgf.apps.googleusercontent.com",
+              "client_id": "860116562885-vsgcojl3ajet5ppnuh1dba799d8p0r0e.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

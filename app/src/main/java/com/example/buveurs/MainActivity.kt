@@ -2,6 +2,7 @@ package com.example.buveurs
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -81,7 +82,9 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
                 return true
             }
             R.id.action_mypage ->{
-                if(lastSelect.equals("mypage")){
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                startActivity(intent)
+                /*if(lastSelect.equals("mypage")){
                     mypageStack.clear()
                     manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
                 }else{
@@ -95,7 +98,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
                         lastSelect = "mypage"
                     }
                 }
-                return true
+                return true*/
             }
         }
         return false
@@ -105,6 +108,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavView.setOnNavigationItemSelectedListener(this)
+        //앱 처음 실행시 Category가 보이게함
         manager.beginTransaction().replace(R.id.mainContent, CategoryViewFragment()).commit()
         lastSelect = "home"
     }
