@@ -18,38 +18,42 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        (txtv_Fail as View).visibility = View.INVISIBLE
         loginAuth= FirebaseAuth.getInstance()
         btn_Login.setOnClickListener {
             if(isValidEmail(loginEdtID.text.toString()) && isValidPasswd(loginEdtPassword.text.toString())) {
                 signIn()
+                Log.d("any",loginAuth?.currentUser?.uid.toString())
             }
-
         }
         txtv_SignUp.setOnClickListener{
             loginEdtID.setText("")
             loginEdtPassword.setText("")
             val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
     }
+    override fun onPause() {
+        super.onPause()
+        //애니메이션 제거
+        overridePendingTransition(0, 0)
+    }
+    //파이어베이스 이메일 로그인
     fun signIn(){
         loginAuth?.signInWithEmailAndPassword(loginEdtID.text.toString(), loginEdtPassword.text.toString())
             ?.addOnCompleteListener {
                 task ->
                 if (task.isSuccessful){
                     Toast.makeText(applicationContext, "로그인성공",Toast.LENGTH_SHORT).show()
-                    Log.d("any","sus")
                     this.finish()
                 }else{
                     Toast.makeText(applicationContext, "로그인실패",Toast.LENGTH_SHORT).show()
                     loginEdtID.setText("")
                     loginEdtPassword.setText("")
-                    Log.d("any","false")
-                    (txtv_Fail as View).visibility = View.INVISIBLE
+                    (txtv_Fail as View).visibility = View.VISIBLE
                 }
-
             }
     }
     fun isValidEmail(email:String): Boolean {
@@ -89,4 +93,5 @@ class LoginActivity : AppCompatActivity() {
     companion object{
         var loginAuth:FirebaseAuth?=null
     }
+
 }

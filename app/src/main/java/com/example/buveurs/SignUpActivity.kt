@@ -31,28 +31,40 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onPause() {
+        super.onPause()
+        //애니메이션 제거
+        overridePendingTransition(0, 0)
+    }
+
     fun signup(){
         //이메일, 패스워드로 회원가입
-        val user = User()
-        val newRef = FirebaseDatabase.getInstance().getReference("/Users/"+signupEdtNickname.text.toString())
-        var result:Any?=null
+        val firebase = FirebaseDatabase.getInstance()
+        val nicknameRef = firebase.getReference("Users/NickName/"+signupEdtNickname.text.toString())
+
+
         //Firebase에서 해당 닉네임이 있는지 검색
-        newRef.addListenerForSingleValueEvent(object : ValueEventListener{
+        nicknameRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()
             }
 
             override fun onDataChange(p0: DataSnapshot) {
+                var result:Any?=null
                 result = p0.getValue()
+                Log.d("any",result.toString())
                 if(result.toString().equals("null")){
                     auth?.createUserWithEmailAndPassword(signupEdtId.text.toString(), signupEdtPassword.text.toString())
                         ?.addOnCompleteListener {
                                 task -> //성공시 Firebase에 회원정보 저장
                                     if (task.isSuccessful){
+                                        val idRef =  firebase.getReference("Users/UserID/"+auth?.currentUser?.uid)
+                                        val user = User()
                                         Toast.makeText(applicationContext, "회원가입완료", Toast.LENGTH_SHORT).show()
                                         user.userID = signupEdtId.text.toString()
                                         user.userNickname = signupEdtNickname.text.toString()
-                                        newRef.setValue(user)
+                                        nicknameRef.setValue(user)
+                                        idRef.setValue(user)
                                         this@SignUpActivity.finish()
                                         //실패시
                                     }else{
@@ -103,7 +115,6 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
     companion object{
-        val PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{4,16}$")
-
+        val PASSWORD_PATTERN = Pattern.compile("^[a-zA-Z0-9!@.#$%^&*?_~]{6,12}$")
     }
 }

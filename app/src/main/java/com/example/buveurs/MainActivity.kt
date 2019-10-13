@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
             R.id.action_mypage ->{
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(0, 0)
                 /*if(lastSelect.equals("mypage")){
                     mypageStack.clear()
                     manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
