@@ -4,16 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.example.buveurs.MainActivity
 import com.example.buveurs.MainActivity.Companion.homeStack
 import com.example.buveurs.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_category.*
+
 
 class CategoryViewFragment : Fragment(){
 
@@ -31,27 +26,41 @@ class CategoryViewFragment : Fragment(){
         val cardViewEct =  view.findViewById<CardView>(R.id.cardViewEct)
         //카드뷰 클릭 후 homeStack에 푸쉬 후 WritelistViewFragment로 화면 전환
         cardviewSoju.setOnClickListener {
+            category = "소주"
             categoryNextFragment()
         }
         cardViewBeer.setOnClickListener {
+            category = "맥주"
             categoryNextFragment()
         }
         cardViewMakgeolli.setOnClickListener {
+            category = "막걸리"
             categoryNextFragment()
         }
         cardViewWine.setOnClickListener {
+            category = "와인"
             categoryNextFragment()
         }
         cardViewLiquor.setOnClickListener {
+            category = "양주"
             categoryNextFragment()
         }
         cardViewEct.setOnClickListener {
+            category = "기타"
             categoryNextFragment()
         }
         return view
     }
     fun categoryNextFragment(){
         homeStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
-        fragmentManager!!.beginTransaction().replace(R.id.mainContent, WritelistViewFragment()).commit()
+        val fragment: Fragment = WritelistViewFragment() // Fragment 생성
+        val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
+        bundle.putString("category", category) // key , value
+        fragment.arguments = bundle
+        fragmentManager!!.beginTransaction().replace(R.id.mainContent, fragment).commit()
+
+    }
+    companion object{
+        var category = "소주"
     }
 }

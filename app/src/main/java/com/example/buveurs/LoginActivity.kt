@@ -1,6 +1,8 @@
 package com.example.buveurs
 
+import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         (txtv_Fail as View).visibility = View.INVISIBLE
         loginAuth= FirebaseAuth.getInstance()
+
         btn_Login.setOnClickListener {
             if(isValidEmail(loginEdtID.text.toString()) && isValidPasswd(loginEdtPassword.text.toString())) {
                 signIn()

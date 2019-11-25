@@ -14,6 +14,7 @@ import android.util.Patterns
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import com.example.buveurs.model.ContentDTO
 import com.google.firebase.database.*
 
 
@@ -52,7 +53,6 @@ class SignUpActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 var result:Any?=null
                 result = p0.getValue()
-                Log.d("any",result.toString())
                 if(result.toString().equals("null")){
                     auth?.createUserWithEmailAndPassword(signupEdtId.text.toString(), signupEdtPassword.text.toString())
                         ?.addOnCompleteListener {
@@ -74,8 +74,10 @@ class SignUpActivity : AppCompatActivity() {
                         }
                 }else{
                     Toast.makeText(applicationContext, "중복되는 닉네임입니다.", Toast.LENGTH_SHORT).show()
+                    //닉네임
+                    Log.d("any", p0.child("userNickname").getValue().toString())
                 }
-                Log.d("any", result.toString())
+
             }
         })
 

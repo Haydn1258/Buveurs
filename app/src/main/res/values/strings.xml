@@ -23,7 +23,8 @@
     <string name="loginfail">로그인실패</string>
     <string name="nickname">닉네임</string>
     <string name="passwordpattern">패스워드(6~12자)</string>
-
+    <string name="alcoholintro">간단 소개</string>
+    <string name="alcoholsnack">어울리는 안주</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

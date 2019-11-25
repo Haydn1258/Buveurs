@@ -5,10 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">#FF8800</item>
         <item name = "windowActionBar">false</item>
         <item name = "windowNoTitle">true</item>
-        <item name="colorControlNormal">#FF8800</item>
 
     </style>
     <style name="SpinnerDivideStyle" parent="android:style/Widget.ListView.DropDown">
@@ -18,6 +16,10 @@
 
     <style name="SpinnerTheme" parent="AppTheme">
         <item name="android:dropDownListViewStyle">@style/SpinnerDivideStyle</item>
+    </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#FF8800</item>
+        <item name="colorControlActivated">#FF8800</item>
     </style>
 
 </resources>
