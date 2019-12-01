@@ -48,13 +48,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/detailViewTxtvDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/detailView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:visibility="gone"
+        android:text="@string/delete" />
     <View
         android:id="@+id/detailView"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toTopOf="@id/detailTopGuide" />
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="@+id/detailStartGuide"
@@ -112,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="가격"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
             <TextView
@@ -122,6 +135,7 @@
                 android:textSize="16sp"
                 android:ems="10"
                 android:maxLength="30"
+                android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"/>
 
             <TextView
@@ -131,6 +145,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/alcoholintro"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="18sp" />
             <TextView
                 android:id="@+id/detailTxtvAlcoholIntro"
@@ -140,6 +155,7 @@
                 android:textSize="16sp"
                 android:ems="10"
                 android:maxLength="30"
+                android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"/>
             <TextView
                 android:id="@+id/txtvSnack"
@@ -148,6 +164,7 @@
                 android:layout_marginTop="20dp"
                 android:text="@string/alcoholsnack"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="18sp" />
 
             <TextView
@@ -158,6 +175,7 @@
                 android:gravity="start|center"
                 android:ems="10"
                 android:maxLength="30"
+                android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -167,6 +185,8 @@
                 android:layout_marginTop="20dp"
                 android:text="댓글"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -184,7 +204,7 @@
                     android:maxLength="30"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:background="@drawable/coment_background"/>
+                    android:background="@drawable/comment_background"/>
 
                 <Button
                     android:id="@+id/detailBtnWrite"
@@ -195,8 +215,18 @@
                     android:text="작성" />
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fragmentDetailRecyclerView"
+                android:overScrollMode="never"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

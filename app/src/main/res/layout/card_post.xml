@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
+            android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             android:text="제목"
@@ -50,6 +51,7 @@
             android:layout_marginStart="5dp"
             app:layout_constraintStart_toEndOf="@+id/cardPostRatingBar"
             app:layout_constraintTop_toTopOf="@+id/cardPostRatingBar"
+            android:textColor="@android:color/black"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <TextView
@@ -61,6 +63,7 @@
             app:layout_constraintStart_toEndOf="@+id/cardPostTxtvRatingNum"
             app:layout_constraintTop_toTopOf="@+id/cardPostRatingBar"
             android:textSize="24sp"
+            android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
 

@@ -49,12 +49,19 @@ class WritingActivity : AppCompatActivity() {
         }
 
         btn_OK.setOnClickListener {
-            if(photoUri==null){
-                Toast.makeText(this, "사진을 올려주세요.", Toast.LENGTH_LONG).show()
-            }else{
-                finish()
-                contentUpload()
+            when{
+                edtAlcoholName.text.toString().equals("") ->{
+                    Toast.makeText(this, "술 이름을 입력하세요.", Toast.LENGTH_LONG).show()
+                }
+                photoUri==null -> {
+                    Toast.makeText(this, "사진을 올려주세요.", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    finish()
+                    contentUpload()
+                }
             }
+
         }
         imageViewBack.setOnClickListener {
             finish()

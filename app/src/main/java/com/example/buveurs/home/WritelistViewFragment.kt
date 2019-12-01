@@ -41,38 +41,37 @@ class WritelistViewFragment : Fragment(){
         title.setText(category)
         firestore = FirebaseFirestore.getInstance()
 
-
-
         view.writeListFragmentRecyclerview.adapter = CardViewRecyclerViewAdapter()
         view.writeListFragmentRecyclerview.layoutManager = LinearLayoutManager(activity)
+
         return view
     }
     inner class CardViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
         var contentUidList : ArrayList<String> = arrayListOf()
+        var mode = true
 
-        init{
+       init{
+            //contentDTOs.clear()
+            //contentUidList.clear()
             firestore?.collection("images")?.document()
             firestore?.collection("images")?.orderBy("timestamp",
                 Query.Direction.DESCENDING)?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                contentDTOs.clear()
-                contentUidList.clear()
                 if(querySnapshot==null){
-
+                    Log.d("snapshot","null")
                 }else{
                     for(snapshot in querySnapshot!!.documents){
                         var item = snapshot.toObject(ContentDTO::class.java)
-                        if(item!!.alcoholcategory!!.equals(category)){
+                        if(mode && item!!.alcoholcategory!!.equals(category)){
                             contentDTOs.add(item!!)
                             contentUidList.add(snapshot.id)
                         }
-
                     }
-
                 }
+                mode=false
                 notifyDataSetChanged()
-
             }
+
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             var view = LayoutInflater.from(parent.context).inflate(R.layout.card_post, parent, false)
@@ -103,14 +102,16 @@ class WritelistViewFragment : Fragment(){
             holder.itemView.setOnClickListener {
                 MainActivity.homeStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
                 val fragment: Fragment = DetailViewFragment() // Fragment 생성
-                val bundle = Bundle(7) // 파라미터는 전달할 데이터 개수
+                val bundle = Bundle(9) // 파라미터는 전달할 데이터 개수
                 bundle.putString("uri", contentDTOs!![position].imageUri) // key , value
                 bundle.putSerializable("alcoholname",contentDTOs!![position].alcoholname)
                 bundle.putSerializable("rating",contentDTOs!![position].starRating)
                 bundle.putSerializable("intro",contentDTOs!![position].intro)
                 bundle.putSerializable("snack",contentDTOs!![position].snack)
                 bundle.putSerializable("price",contentDTOs!![position].price)
-                bundle.putSerializable("writename", contentDTOs!![position].writeName)
+                bundle.putString("writename", contentDTOs!![position].writeName)
+                bundle.putSerializable("uid", contentDTOs!![position].uid)
+                bundle.putSerializable("stack","home")
                 fragment.arguments = bundle
                 fragmentManager!!.beginTransaction().replace(R.id.mainContent, fragment).commit()
             }
@@ -119,3 +120,4 @@ class WritelistViewFragment : Fragment(){
 
     }
 }
+

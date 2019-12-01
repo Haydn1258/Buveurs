@@ -1,6 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/searchStartGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/searchEndGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+    <Spinner
+        android:id="@+id/searchUserSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/comment_background"
+        android:entries="@array/spinnerUserArray"
+        android:theme="@style/SpinnerTheme"
+        app:layout_constraintStart_toStartOf="@+id/searchStartGuide"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/edtSearch"
+        android:maxLength="20"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchUserSpinner"
+        app:layout_constraintEnd_toEndOf="@+id/searchEndGuide"
+        android:background="@drawable/comment_background"
+        android:layout_marginTop="20dp"
+        android:paddingStart="10dp"/>
+    <ImageButton
+        android:id="@+id/searchImageButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:srcCompat="@drawable/baseline_search_black_24dp"
+        app:layout_constraintTop_toTopOf="@+id/edtSearch"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="@+id/searchEndGuide"/>
+
+    <View
+        android:id="@+id/searchTopView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/searchUserSpinner" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/searchTopView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:overScrollMode="never"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
