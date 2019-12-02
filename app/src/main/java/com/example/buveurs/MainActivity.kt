@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.buveurs.LoginActivity.Companion.loginAuth
 import com.example.buveurs.home.CategoryViewFragment
@@ -16,7 +17,12 @@ import com.example.buveurs.search.SearchViewFragment
 import com.example.buveurs.writing.WritingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
@@ -97,26 +103,42 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
             }
             R.id.action_mypage ->{
                 //로그인 안되어있을시 로그인화면으로 이동
+                val myPageViewFragment: Fragment = MyPageViewFragment() // Fragment 생성
                 if (loginAuth?.getCurrentUser() == null) {
-                    val intent = Intent(this@MainActivity, LoginActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
+                    manager.beginTransaction().replace(R.id.mainContent, myPageViewFragment).commit()
                 }else{
-
-                    if(lastSelect.equals("mypage")){
-                        mypageStack.clear()
-                        manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
-                    }else{
-                        stackPush(lastSelect)
-                        if(mypageStack.empty()){
-                            manager.beginTransaction().replace(R.id.mainContent, MyPageViewFragment()).commit()
-                            lastSelect = "mypage"
-                        }else{
-                            val lastFragmentStack = mypageStack.pop()
-                            manager.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
-                            lastSelect = "mypage"
+                    stackPush(lastSelect)
+                    var nickname = ""
+                    val nicknameRef =   FirebaseDatabase.getInstance().getReference("Users/UserID/"+ FirebaseAuth.getInstance().currentUser?.uid)
+                    nicknameRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError) {
                         }
-                    }
+                        override fun onDataChange(p0: DataSnapshot) {
+                            nickname = p0.child("userNickname").getValue().toString()
+
+                            val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
+                            bundle.putSerializable("nickname",nickname)
+                            myPageViewFragment.arguments = bundle
+                            if(lastSelect.equals("mypage")){
+                                mypageStack.clear()
+                                manager.beginTransaction().replace(R.id.mainContent, myPageViewFragment).commit()
+                            }else{
+                                stackPush(lastSelect)
+                                if(mypageStack.empty()){
+                                    manager.beginTransaction().replace(R.id.mainContent, myPageViewFragment).commit()
+                                    lastSelect = "mypage"
+                                }else{
+                                    val lastFragmentStack = mypageStack.pop()
+                                    manager.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+                                    lastSelect = "mypage"
+                                }
+                            }
+
+                        }
+                    })
+
+
+
                     return true
                 }
 
@@ -129,8 +151,8 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         bottomNavView.setOnNavigationItemSelectedListener(this)
+        bottomNavView.selectedItemId = R.id.action_home
         //앱 처음 실행시 Category가 보이게함
-        manager.beginTransaction().replace(R.id.mainContent, CategoryViewFragment()).commit()
         lastSelect = "home"
 
     }

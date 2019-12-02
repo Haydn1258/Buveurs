@@ -31,7 +31,7 @@ class SearchViewFragment : Fragment() {
         view.searchRecyclerView.layoutManager = LinearLayoutManager(activity)
         view.searchImageButton.setOnClickListener {
             val fragment: Fragment = SearchViewFragment() // Fragment 생성
-            val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
+            val bundle = Bundle(2) // 파라미터는 전달할 데이터 개수
             bundle.putSerializable("searchContent",view.edtSearch.text.toString())
             bundle.putSerializable("searchUser", view.searchUserSpinner.selectedItem.toString())
             fragment.arguments = bundle
@@ -73,7 +73,6 @@ class SearchViewFragment : Fragment() {
 
                         }
                     }
-
                 }
                 mode = false
                 notifyDataSetChanged()
