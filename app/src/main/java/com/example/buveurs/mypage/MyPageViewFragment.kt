@@ -2,6 +2,7 @@ package com.example.buveurs.mypage
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -33,6 +34,7 @@ class MyPageViewFragment :Fragment(){
         view.mypageTxtvNickName.setText(nickname)
         view.mypageTxtvEmail.setText(FirebaseAuth.getInstance().currentUser?.email)
 
+
         view.mypageBtnMywrite.setOnClickListener {
             val searchViewFragment: Fragment = SearchViewFragment() // Fragment 생성
             val bundle = Bundle(1) // 파라미터는 전달할 데이터 개수
@@ -46,6 +48,7 @@ class MyPageViewFragment :Fragment(){
 
         view.mypageBtnLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
+            bottomNavView.focusable
         }
 
         return view

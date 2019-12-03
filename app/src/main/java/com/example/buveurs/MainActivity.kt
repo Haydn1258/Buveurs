@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -22,12 +23,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
 
     val manager = supportFragmentManager
+    val READ_EXTERNAL_STORAGE_PERMISSION = 100
 
 
     //바텀네비게이션 선택 이벤트
@@ -79,9 +82,9 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
                     startActivity(intent)
                     //overridePendingTransition(0, 0)
                 }else{
-                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1)
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_EXTERNAL_STORAGE_PERMISSION)
                     if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                        startActivity(Intent(this, WritingActivity::class.java))
+
                     }
                     /*if(lastSelect.equals("writing")){
                         writingStack.clear()
@@ -105,7 +108,8 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
                 //로그인 안되어있을시 로그인화면으로 이동
                 val myPageViewFragment: Fragment = MyPageViewFragment() // Fragment 생성
                 if (loginAuth?.getCurrentUser() == null) {
-                    manager.beginTransaction().replace(R.id.mainContent, myPageViewFragment).commit()
+                    val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                    startActivity(intent)
                 }else{
                     stackPush(lastSelect)
                     var nickname = ""
@@ -147,6 +151,33 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         return false
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            READ_EXTERNAL_STORAGE_PERMISSION -> {
+                // If request is cancelled, the result arrays are empty.
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    startActivity(Intent(this, WritingActivity::class.java))
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return
+            }
+
+            // Add other 'when' lines to check for other
+            // permissions this app might request.
+            else -> {
+                // Ignore all other requests.
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -181,5 +212,6 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
        var writingStack = Stack<Fragment>()
        var mypageStack = Stack<Fragment>()
        var lastSelect = ""
+
     }
 }

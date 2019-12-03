@@ -36,15 +36,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
 
-    <ImageView
-        android:id="@+id/imgLogo"
+    <TextView
+        android:id="@+id/categoryTxtv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/categoryTopGuide"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Buveurs"
+        android:textSize="36sp"
+        android:textColor="@color/colorTeal"/>
 
     <View
         android:id="@+id/categoryTopView"
@@ -92,9 +94,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewSoju"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/soju"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -129,9 +131,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewBeer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/beer"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -166,9 +168,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewMakgeolli"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/makgeolli"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,9 +203,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewWine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/wine"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -235,9 +237,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewLiquor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/liquor"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -270,9 +272,9 @@
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/imageViewEct"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/guitar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

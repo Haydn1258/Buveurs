@@ -65,6 +65,12 @@ class DetailViewFragment : Fragment(){
             view.detailViewTxtvDelete.visibility = View.VISIBLE
         }
 
+        if(FirebaseAuth.getInstance().currentUser?.uid==null){
+            view.detailBtnWrite.visibility = View.GONE
+            view.detailEdtComment.visibility = View.GONE
+        }
+
+
         view.detailViewTxtvDelete.setOnClickListener {
             FirebaseFirestore.getInstance().collection("images").document(writename!!).delete()
             val lastFragmentStack = MainActivity.homeStack.pop()

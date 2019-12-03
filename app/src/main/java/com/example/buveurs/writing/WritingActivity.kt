@@ -43,6 +43,7 @@ class WritingActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         imageAlcohol.setOnClickListener {
+
             var photoPickerIntent = Intent(Intent.ACTION_PICK)
             photoPickerIntent.type = "image/*"
             startActivityForResult(photoPickerIntent, PICK_IMAGE_FROM_ALBUM)
@@ -81,8 +82,6 @@ class WritingActivity : AppCompatActivity() {
                 photoUri = data?.data
                 imageAlcohol.setImageURI(photoUri)
             }
-        }else{
-
         }
     }
     //업로드함수
