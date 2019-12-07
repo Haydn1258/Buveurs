@@ -52,6 +52,7 @@ class DetailViewFragment : Fragment(){
         val price = arguments?.getString("price")
         val writename = arguments?.getString("writename")
         val uid = arguments?.getString("uid")
+        val stackType = arguments!!.getString("stack")
 
 
 
@@ -73,18 +74,29 @@ class DetailViewFragment : Fragment(){
 
         view.detailViewTxtvDelete.setOnClickListener {
             FirebaseFirestore.getInstance().collection("images").document(writename!!).delete()
-            val lastFragmentStack = MainActivity.homeStack.pop()
-            fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+            if(stackType.equals("home")){
+                val lastFragmentStack = MainActivity.homeStack.pop()
+                fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+            }else if(stackType.equals("search")){
+                val lastFragmentStack = MainActivity.searchStack.pop()
+                fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+            }else if(stackType.equals("mypage")){
+                val lastFragmentStack = MainActivity.mypageStack.pop()
+                fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+            }
         }
 
         Glide.with(view.context).load(arguments?.getString("uri")).into(view.detailImageAlcohol)
 
         detailViewBackImageButton.setOnClickListener {
-            if(arguments!!.getString("stack")!!.equals("home")){
+            if(stackType.equals("home")){
                 val lastFragmentStack = MainActivity.homeStack.pop()
                 fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
-            }else{
+            }else if(stackType.equals("search")){
                 val lastFragmentStack = MainActivity.searchStack.pop()
+                fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+            }else if(stackType.equals("mypage")){
+                val lastFragmentStack = MainActivity.mypageStack.pop()
                 fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
             }
 

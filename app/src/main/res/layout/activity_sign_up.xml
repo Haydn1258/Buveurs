@@ -116,6 +116,7 @@
         android:id="@+id/signupEdtNickname"
         android:hint="@string/nickname"
         android:background="@null"
+        android:inputType="text"
         android:maxLength="9"
         app:layout_constraintStart_toStartOf="@id/centerViewLeftGuide"
         app:layout_constraintEnd_toEndOf="@id/centerViewRightGuide"

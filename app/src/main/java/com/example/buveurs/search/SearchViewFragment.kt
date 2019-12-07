@@ -2,6 +2,7 @@ package com.example.buveurs.search
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.buveurs.R
 import com.example.buveurs.home.CategoryViewFragment
 import com.example.buveurs.home.DetailViewFragment
 import com.example.buveurs.model.ContentDTO
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.card_post.view.*
@@ -27,19 +29,42 @@ class SearchViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = LayoutInflater.from(activity).inflate(R.layout.fragment_search, container, false)
+        val stackType = arguments?.getString("stack")
+        if(stackType.equals("mypage")){
+            view.searchUserSpinner.visibility = View.GONE
+            view.edtSearch.visibility = View.GONE
+            view.searchImageButton.visibility = View.GONE
+            view.searchBackImageButton.visibility = View.VISIBLE
+            view.searchTxtvMyWrite.visibility = View.VISIBLE
+        }
         view.searchRecyclerView.adapter = CardViewRecyclerViewAdapter()
         view.searchRecyclerView.layoutManager = LinearLayoutManager(activity)
         view.searchImageButton.setOnClickListener {
-            val fragment: Fragment = SearchViewFragment() // Fragment 생성
-            val bundle = Bundle(2) // 파라미터는 전달할 데이터 개수
-            bundle.putSerializable("searchContent",view.edtSearch.text.toString())
-            bundle.putSerializable("searchUser", view.searchUserSpinner.selectedItem.toString())
-            fragment.arguments = bundle
-            fragmentManager!!.beginTransaction().replace(R.id.mainContent, fragment).commit()
-
+            search()
+        }
+        view.searchBackImageButton.setOnClickListener {
+            val lastFragmentStack = MainActivity.mypageStack.pop()
+            fragmentManager!!.beginTransaction().replace(R.id.mainContent, lastFragmentStack).commit()
+        }
+        view.edtSearch.setOnKeyListener { view, i, keyEvent ->
+            when(i){
+                KeyEvent.KEYCODE_ENTER ->{
+                    search()
+                }
+            }
+            return@setOnKeyListener true
         }
 
+
         return view
+    }
+    fun search(){
+        val fragment: Fragment = SearchViewFragment() // Fragment 생성
+        val bundle = Bundle(2) // 파라미터는 전달할 데이터 개수
+        bundle.putSerializable("searchContent",view!!.edtSearch.text.toString())
+        bundle.putSerializable("searchUser", view!!.searchUserSpinner.selectedItem.toString())
+        fragment.arguments = bundle
+        fragmentManager!!.beginTransaction().replace(R.id.mainContent, fragment).commit()
     }
     inner class CardViewRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
@@ -106,9 +131,17 @@ class SearchViewFragment : Fragment() {
             viewholder.cardPostTxtvRatingNum.text = contentDTOs!![position].starRating.toString()
 
             holder.itemView.setOnClickListener {
-                MainActivity.searchStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
+               //
                 val fragment: Fragment = DetailViewFragment() // Fragment 생성
-                val bundle = Bundle(8) // 파라미터는 전달할 데이터 개수
+                val bundle = Bundle(9) // 파라미터는 전달할 데이터 개수
+                if (arguments?.getString("stack").isNullOrEmpty()){
+
+                    MainActivity.searchStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
+                    bundle.putSerializable("stack","search")
+                }else if(arguments?.getString("stack").equals("mypage")){
+                    MainActivity.mypageStack.push(fragmentManager!!.findFragmentById(R.id.mainContent))
+                    bundle.putSerializable("stack","mypage")
+                }
                 bundle.putString("uri", contentDTOs!![position].imageUri) // key , value
                 bundle.putSerializable("alcoholname",contentDTOs!![position].alcoholname)
                 bundle.putSerializable("rating",contentDTOs!![position].starRating)
@@ -116,7 +149,7 @@ class SearchViewFragment : Fragment() {
                 bundle.putSerializable("snack",contentDTOs!![position].snack)
                 bundle.putSerializable("price",contentDTOs!![position].price)
                 bundle.putSerializable("writename", contentDTOs!![position].writeName)
-                bundle.putSerializable("stack","search")
+                bundle.putSerializable("uid", FirebaseAuth.getInstance().currentUser?.uid.toString())
                 fragment.arguments = bundle
                 fragmentManager!!.beginTransaction().replace(R.id.mainContent, fragment).commit()
             }

@@ -3,29 +3,30 @@ package com.example.buveurs
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.buveurs.LoginActivity.Companion.loginAuth
 import com.example.buveurs.home.CategoryViewFragment
 import com.example.buveurs.mypage.MyPageViewFragment
 import com.example.buveurs.search.SearchViewFragment
 import com.example.buveurs.writing.WritingActivity
+import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_mypage.*
-import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import java.util.*
+
 
 class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -183,8 +184,12 @@ class MainActivity : AppCompatActivity(),BottomNavigationView.OnNavigationItemSe
         setContentView(R.layout.activity_main)
         bottomNavView.setOnNavigationItemSelectedListener(this)
         bottomNavView.selectedItemId = R.id.action_home
-        //앱 처음 실행시 Category가 보이게함
-        lastSelect = "home"
+        FirebaseAuth.getInstance().addAuthStateListener {
+            if(it.currentUser ==null){
+                bottomNavView.selectedItemId = R.id.action_home
+            }
+        }
+
 
     }
 

@@ -33,25 +33,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/mypageNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:text="닉네임"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mypageTopGuide" />
     <View
         android:id="@+id/mypageView"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintTop_toTopOf="@id/mypageTopGuide" />
+
+
+    <TextView
+        android:id="@+id/mypageNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="닉네임"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypageTopGuide" />
+
 
     <TextView
         android:id="@+id/mypageTxtvNickName"
@@ -64,18 +66,26 @@
         app:layout_constraintStart_toEndOf="@+id/mypageNickname"
         app:layout_constraintTop_toTopOf="@+id/mypageNickname" />
 
+    <View
+        android:id="@+id/mypageView_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/mypageTxtvNickName"
+        android:layout_marginTop="30dp"/>
+
     <TextView
         android:id="@+id/mypageEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="이메일"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mypageNickname" />
+        app:layout_constraintTop_toBottomOf="@id/mypageView_2" />
 
     <TextView
         android:id="@+id/mypageTxtvEmail"
@@ -87,6 +97,13 @@
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/mypageEmail"
         app:layout_constraintTop_toTopOf="@+id/mypageEmail" />
+    <View
+        android:id="@+id/mypageView_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@id/mypageTxtvEmail"
+        android:layout_marginTop="30dp"/>
 
     <Button
         android:textSize="18sp"
@@ -94,10 +111,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="@id/mypageCenterGuide"
         app:layout_constraintStart_toStartOf="@+id/mypageEmail"
-        app:layout_constraintTop_toBottomOf="@+id/mypageEmail"
+        app:layout_constraintTop_toBottomOf="@+id/mypageView_3"
         android:text="내가 쓴 글"
         android:textColor="@android:color/black"
         android:background="@drawable/edge"
